@@ -7,14 +7,15 @@ class Estacionamiento:
 		self.datos.append([inicio, -1])
 		self.datos.append([final, 1])
 		self.ordenar()
+		print(self.datos)
 
 	def ordenar(self):
-		for iter in range(len(self.datos)-1,0,-1):
-			for i in range(iter):
-				if self.datos[i][0] > self.datos[i+1][0] and self.datos[i][1] == self.datos[i+1][1]:
-					temp = self.datos[i]
-					self.datos[i] = self.datos[i+1]
-					self.datos[i+1] = temp
+		for itera in range(len(self.datos)):
+			for i in range(itera):
+				if (self.datos[itera][0] < self.datos[i][0]) or (self.datos[itera][0] == self.datos[i][0]  and self.datos[itera][1] < self.datos[i][1]):
+					temp = self.datos[itera]
+					self.datos[itera] = self.datos[i]
+					self.datos[i] = temp
 
 	def Reservar(self, inicio,final):	 
 		self.agregarI(inicio,final)
@@ -25,8 +26,8 @@ class Estacionamiento:
 			if cnt > best:
 				best = cnt
 				beststart = self.datos[i][0]
-				bestend = self.datos[i+1][0]
-		return (beststart, bestend) 
+				bestend = self.datos[i+1][0] 
+		print (str(best) + str(beststart) + str(bestend))		
 		if best > self.tam:
 			print ('No se puede reservar en este horario')
 			for i in range(len(self.datos) - 1):
@@ -40,6 +41,10 @@ class Estacionamiento:
 			return False
 		else:
 			print('Reservacion guardada satisfactoriamente')
+			return True
 
-e = Estacionamiento(10)
-print (str(e.tam))
+e = Estacionamiento(2)
+e.agregarI(8, 10)
+e.agregarI(10,12)
+e.Reservar(9,11)
+e.Reservar(17,18)
