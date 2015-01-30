@@ -25,7 +25,7 @@ class Estacionamiento:
 	def Reservar(self, inicio,final):	 
 		a = self.agregarI(inicio,final)
 		if not(a):
-			return
+			return a
 		best = 0
 		cnt = 0
 		for i in range(len(self.datos) - 1):
