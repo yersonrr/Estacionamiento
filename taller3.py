@@ -6,21 +6,29 @@ def park(st, et):
 	global carPark
 	j = st
 	while j <= et:
-		j += 1
-		elem = j - 6
+		elem = j - 7
 		carPark[elem] += 1
-		print (carPark[elem])
+		j += 1
+		#print ('Elem::::::::::::'+str(carPark[elem]))
+		if (carPark[elem] > 10):
+			return False
+	return True
 
 def main(arg):
+	global carPark
+	carPark = [0,0,0,0,0,0,0,0,0,0,0,0]
 	fo = open(arg,'r').read()
 	fo = fo.split( )
 	i = 0
 	while i < len(fo): 
 		sh = int(int(fo[i])/100)
 		eh = int(int(fo[i+1])/100)	
-		park(sh, eh)
+		v = park(sh, eh)
 		i = i + 2
-
+		#print (str(v))
+		if v == False:
+			return v
+	return v
 
 if __name__ == '__main__':
     print(main(sys.argv[1]))
